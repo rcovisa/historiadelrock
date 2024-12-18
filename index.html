@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Historia del Rock</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .timeline-container {
+            width: 50%;
+            height: 2000px;
+            position: relative;
+        }
+
+        .timeline {
+            position: absolute;
+            left: 50%;
+            width: 5px;
+            height: 100%;
+            background-color: white;
+            transform: translateX(-50%);
+        }
+
+        .point {
+            position: absolute;
+            left: 60%;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }
+
+        .point::before {
+            content: attr(data-year);
+            position: absolute;
+            left: 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 25px;
+        }
+        
+        .info-container {
+            width: 50%;
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .info-card {
+            background-color: rgba(0, 0, 0, 0.1);
+            border: 2px solid white;
+            color: white;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+            position: relative;
+            display: none; /* Inicialmente ocultas */
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .highlight {
+            color: #FFD700; /* Dorado */
+            cursor: pointer;
+            text-decoration: underline; /* Subrayado para indicar interactividad */
+        }
+
+        .sub-card {
+            display: none; /* Inicialmente ocultas */
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid #FFD700; /* Borde dorado */
+            padding: 10px; /* Espaciado interno */
+            margin-top: 10px; /* Espaciado superior */
+            border-radius: 5px; /* Bordes redondeados */
+            width: 250px; /* Ancho fijo para mayor horizontalidad */
+            max-width: 90%; /* Evita que se salga del contenedor */
+        }
+
+
+
+        .header {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    text-align: right;
+    display: flex;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: 36px;
+    color: white;
+    margin-right: 15px;
+}
+
+.vinyl {
+    width: 50px;
+    height: 50px;
+    background-color: #333;
+    border-radius: 50%;
+    position: relative;
+    animation: rotate 4s linear infinite;
+}
+
+.vinyl::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.vinyl::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 3px solid white;
+    border-radius: 50%;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.artist-names {
+    position: absolute;
+    left: 60px;
+    top: 15%;
+    max-height: 80vh;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.artist-name {
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s ease; /* Transición suave para el cambio de opacidad */
+}
+
+.artist-name {
+    opacity: 1; /* Todos los nombres son visibles por defecto */
+}
+
+.artist-name:hover {
+    opacity: 1; /* El nombre bajo el mouse permanece completamente visible */
+}
+
+.artist-names .artist-name:not(:hover) {
+    opacity: 0.5; /* Oscurece los demás nombres */
+}
+
+
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Historia del Rock</h1>
+        <div class="waves">
+            <div class="vinyl"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Nombres de artistas -->
+        <div class="artist-names">
+            <a href="www.google.com" class="artist-name" data-index="0">Elvis Presley</a>
+            <a href="#" class="artist-name" >The Beatles</a>
+            <a href="#" class="artist-name" >Pink Floyd</a>
+            <a href="#" class="artist-name" >Led Zeppelin</a>
+            <a href="#" class="artist-name" >Queen</a>
+            <a href="#" class="artist-name" >Black Sabbath</a>
+            <a href="#" class="artist-name" >The Who</a>
+            <a href="#" class="artist-name" >The Rolling Stones</a>
+            <a href="#" class="artist-name" >AC/DC</a>
+            <a href="#" class="artist-name" >Chuck Berry</a>
+            <a href="#" class="artist-name" >Little Richard</a>
+            <a href="#" class="artist-name" >Kiss</a>
+            <a href="#" class="artist-name" >Scorpions</a>
+            <a href="#" class="artist-name" >Motörhead</a>
+            <a href="#" class="artist-name" >Deep Purple</a>
+
+
+        </div>
+    
+        <!-- Línea de tiempo -->
+        <div class="timeline-container">
+            <div class="timeline"></div>
+            <div class="point" style="top: 10%;" data-index="0" data-year="1950"></div>
+            <div class="point" style="top: 20%;" data-index="1" data-year="1954"></div>
+            <div class="point" style="top: 30%;" data-index="2" data-year="1962"></div>
+            <div class="point" style="top: 40%;" data-index="3" data-year="1967"></div>
+            <div class="point" style="top: 50%;" data-index="4" data-year="1970"></div>
+            <div class="point" style="top: 60%;" data-index="5" data-year="1976"></div>
+            <div class="point" style="top: 70%;" data-index="6" data-year="1980"></div>
+            <div class="point" style="top: 80%;" data-index="7" data-year="1991"></div>
+        </div>
+    </div>
+
+        <div class="info-container" id="infoContainer">
+                <div class="info-card" id="infoCard0">
+                    <span class="close-btn" onclick="closeCard(0)">&times;</span>
+                    <h2>Orígenes del Rock</h2>
+                    <h3>1950</h3>
+                    <p>La popularización de este nuevo género se le atribuye al locutor de radio <span class="highlight" data-info="alan-freed">Alan Freed</span>, quien comenzó a utilizar el término "rock and roll" para describir la música que transmitía en su programa.
+
+                    Otro personaje importante en la difusión del rock and roll fue <span class="highlight" data-info="leo-mintz">Leo Mintz</span>, quien notó que los adolescentes blancos disfrutaban del rhythm and blues pero no lo compraban debido a prejuicios raciales. Mintz convenció a Freed de que transmitiera esta música para un público multirracial, contribuyendo así a su popularización.</p>
+
+                    <div class="sub-card" id="alan-freed">
+                        <h4>Alan Freed</h4>
+                        <p>Alan Freed fue un influyente DJ estadounidense que popularizó el término "rock and roll". Fue clave en romper barreras raciales en la industria musical.</p>
+                    </div>
+
+                    <div class="sub-card" id="leo-mintz">
+                        <h4>Leo Mintz</h4>
+                        <p>Leo Mintz fue el propietario de Record Rendezvous y convenció a Alan Freed de promover rhythm and blues en la radio.</p>
+                    </div>
+                </div>
+
+                <div class="info-card" id="infoCard1">
+                    <span class="close-btn" onclick="closeCard(1)">&times;</span>
+                    <h2>Orígenes del Rock</h2>
+                    <h3>1954</h3>
+                    <p>Rock Around de Roll se popularizó</p>
+
+                  
+
+                    
+                </div>
+        
+        </div>
+
+    </div>
+
+    <!-- Script para manejar los eventos -->
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const points = document.querySelectorAll('.point');
+    const artistNames = document.querySelectorAll('.artist-name');
+    const highlights = document.querySelectorAll('.highlight');
+
+    // Función para mostrar la tarjeta de información
+    function showInfoCard(index) {
+        document.querySelectorAll('.info-card').forEach(card => {
+            card.style.display = 'none';
+        });
+        const infoCard = document.getElementById(`infoCard${index}`);
+        if (infoCard) {
+            infoCard.style.display = 'block';
+        }
+    }
+
+    // Función para resaltar y hacer scroll al punto
+    function highlightAndScrollToPoint(index) {
+        points.forEach(point => {
+            if (point.getAttribute('data-index') === index) {
+                point.style.backgroundColor = '#FFD700';
+                point.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                setTimeout(() => {
+                    point.style.backgroundColor = 'white';
+                    point.style.transform = 'translate(-50%, -50%) scale(1)';
+                }, 1000);
+                point.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+    }
+
+    // Event listener para los puntos en la línea de tiempo
+    points.forEach(point => {
+        point.addEventListener('click', function() {
+            const index = this.getAttribute('data-index');
+            showInfoCard(index);
+            highlightAndScrollToPoint(index);
+        });
+    });
+
+    // Event listener para los nombres de artistas
+    artistNames.forEach(name => {
+        name.addEventListener('click', function(e) {
+            e.preventDefault();
+            const index = this.getAttribute('data-index');
+            showInfoCard(index);
+            highlightAndScrollToPoint(index);
+        });
+    });
+
+    // Event listener para los elementos resaltados
+    highlights.forEach(highlight => {
+        highlight.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const infoId = this.getAttribute('data-info');
+            const subCard = document.getElementById(infoId);
+            
+            document.querySelectorAll('.sub-card').forEach(card => {
+                card.style.display = 'none';
+            });
+            
+            if (subCard) {
+                subCard.style.display = subCard.style.display === 'block' ? 'none' : 'block';
+            }
+        });
+    });
+
+    // Función para cerrar la tarjeta de información
+    window.closeCard = function(index) {
+        document.getElementById(`infoCard${index}`).style.display = 'none';
+    };
+});
+   </script>
+
+</body>
+</html>
